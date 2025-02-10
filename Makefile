@@ -1,5 +1,5 @@
-STUID = ysyx_22040000
-STUNAME = 张三
+STUID = ysyx_24090013
+STUNAME = 陈浩佳
 
 # DO NOT modify the following code!!!
 
@@ -34,6 +34,7 @@ endef
 	                | git commit -F - $(GITFLAGS)                        `# commit changes in tracer branch`
 	-@$(call git_soft_checkout, $(WORK_BRANCH))                          `# switch to work branch`
 	-@mv $(WORK_INDEX) .git/index                                        `# restore git index`
+	-@echo $(TRACER_BRANCH)
 
 .clean_index:
 	rm -f $(WORK_INDEX)

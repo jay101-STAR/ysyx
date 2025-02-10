@@ -1,0 +1,12 @@
+[submodule "fceux-am"]
+	path = fceux-am
+	url = ../ysyx-workbench_backup/fceux-am/
+[submodule "nvboard"]
+	path = nvboard
+	url = ../ysyx-workbench_backup/nvboard/
+[submodule "yosys-sta"]
+	path = yosys-sta
+	url = ../ysyx-workbench_backup/yosys-sta/
+[submodule "am-kernels"]
+	path = am-kernels
+	url = ../ysyx-workbench_backup/am-kernels/
