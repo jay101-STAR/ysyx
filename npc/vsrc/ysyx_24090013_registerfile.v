@@ -28,10 +28,14 @@ module registerfile #(parameter ADDR_WIDTH = 1,parameter DATA_WIDTH = 1) (
   input [4:0] rs2_raddr,
   output [31:0] rs2_rdata
 );
+	 import "DPI-C" function void get_register_value(input int reg_num, input int source_value);
   reg [DATA_WIDTH-1:0] rf [2**ADDR_WIDTH-1:0];
   always @(posedge clk) begin
     if (wen) rf[waddr] <= wdata;
   end
   assign rs1_rdata = rs1_ren? rf[rs1_raddr] : 32'b0;
   assign rs2_rdata = rs2_ren? rf[rs2_raddr] : 32'b0;
+  always@(*)begin
+	get_register_value(10,rf[10]);
+  end 
 endmodule

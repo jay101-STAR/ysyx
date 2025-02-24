@@ -2,6 +2,15 @@ MODULE = ysyx_24090013_top
 CSRCS = $(shell find $(abspath ./csrc) -name "*.cpp")
 VSRCS = $(shell find $(abspath ./vsrc) -name "*.v")
 VSRCS += $(shell find $(abspath ./vsrc/*) -name "*.v")
+INC_PATH = $(NPC_HOME)/include/
+BINARY := ./obj_dir/V$(MODULE)
+LIBS = -lreadline   # link the <readline> lib
+LIBS += -ldl        # link the <dlfcn> lib
+
+ARGS ?= 
+# IMG from npc.mk
+IMG ?=
+NPC_EXEC := $(BINARY) $(ARGS) $(IMG)
 .PHONY:sim
 sim: waveform.vcd
 
@@ -13,12 +22,14 @@ verilate: .stamp.verilate
 .PHONY:build
 build: obj_dir/V$(MODULE)
 
+run-env: $(BINARY) 
 
-.PHONY:waves
-waves: waveform.vcd
-	@echo
-	@echo "### WAVES ###"
-	gtkwave wave.fst
+
+.PHONY:run
+run: run-env
+	$(BINARY) $(ARGS) $(IMG)
+	@# gtkwave wave.fst
+	
 
 
 waveform.vcd: ./obj_dir/V$(MODULE)
@@ -50,7 +61,8 @@ waveform.vcd: ./obj_dir/V$(MODULE)
 .stamp.verilate: $(VSRCS) $(CSRCS)
 	@echo
 	@echo "### VERILATING ###"
-	verilator -Wno-STMTDLY -Wno-MODDUP --build --trace-fst --top-module $(MODULE) -cc $(VSRCS) --exe $(CSRCS) -I/home/jay/Desktop/ics2024/ysyx-workbench/npc/vsrc
+	verilator -Wno-STMTDLY -Wno-MODDUP --trace --top-module $(MODULE) -cc $(VSRCS) --exe $(CSRCS) -I$(INC_PATH) -I/home/jay/Desktop/ics2024/ysyx-workbench/npc/vsrc
+	@echo "LIBS +=$(LIBS)" >> ./obj_dir/V$(MODULE).mk   
 	@touch .stamp.verilate
 
 
@@ -70,6 +82,6 @@ lint: $(MODULE).v
 clean:
 	rm -rf .stamp.*;
 	rm -rf ./obj_dir
-	rm -rf waveform.vcd
+	rm -rf wave.vcd
 	rm -rf wave.fst.hier
 	rm -rf wave.fst	

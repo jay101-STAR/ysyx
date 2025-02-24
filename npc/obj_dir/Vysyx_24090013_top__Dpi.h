@@ -16,8 +16,10 @@ extern "C" {
 
 
     // DPI IMPORTS
-    // DPI import at /home/jay/Desktop/ics2024/ysyx-workbench/npc/vsrc/ysyx_24090013_id.v:16:32
+    // DPI import at /home/jay/Desktop/ics2024/ysyx-workbench/npc/vsrc/ysyx_24090013_id.v:18:32
     extern void ebreak(int station, int inst);
+    // DPI import at /home/jay/Desktop/ics2024/ysyx-workbench/npc/vsrc/ysyx_24090013_registerfile.v:31:32
+    extern void get_register_value(int reg_num, int source_value);
 
 #ifdef __cplusplus
 }

@@ -2,7 +2,7 @@
 // DESCRIPTION: Verilator output: Model implementation (design independent parts)
 
 #include "Vysyx_24090013_top__pch.h"
-#include "verilated_fst_c.h"
+#include "verilated_vcd_c.h"
 
 //============================================================
 // Constructors
@@ -12,6 +12,7 @@ Vysyx_24090013_top::Vysyx_24090013_top(VerilatedContext* _vcontextp__, const cha
     , vlSymsp{new Vysyx_24090013_top__Syms(contextp(), _vcname__, this)}
     , clk{vlSymsp->TOP.clk}
     , rst{vlSymsp->TOP.rst}
+    , inst_rom_1{vlSymsp->TOP.inst_rom_1}
     , rootp{&(vlSymsp->TOP)}
 {
     // Register model with the context
@@ -106,11 +107,11 @@ std::unique_ptr<VerilatedTraceConfig> Vysyx_24090013_top::traceConfig() const {
 //============================================================
 // Trace configuration
 
-void Vysyx_24090013_top___024root__trace_decl_types(VerilatedFst* tracep);
+void Vysyx_24090013_top___024root__trace_decl_types(VerilatedVcd* tracep);
 
-void Vysyx_24090013_top___024root__trace_init_top(Vysyx_24090013_top___024root* vlSelf, VerilatedFst* tracep);
+void Vysyx_24090013_top___024root__trace_init_top(Vysyx_24090013_top___024root* vlSelf, VerilatedVcd* tracep);
 
-VL_ATTR_COLD static void trace_init(void* voidSelf, VerilatedFst* tracep, uint32_t code) {
+VL_ATTR_COLD static void trace_init(void* voidSelf, VerilatedVcd* tracep, uint32_t code) {
     // Callback from tracep->open()
     Vysyx_24090013_top___024root* const __restrict vlSelf VL_ATTR_UNUSED = static_cast<Vysyx_24090013_top___024root*>(voidSelf);
     Vysyx_24090013_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
@@ -125,13 +126,13 @@ VL_ATTR_COLD static void trace_init(void* voidSelf, VerilatedFst* tracep, uint32
     if (strlen(vlSymsp->name())) tracep->popPrefix();
 }
 
-VL_ATTR_COLD void Vysyx_24090013_top___024root__trace_register(Vysyx_24090013_top___024root* vlSelf, VerilatedFst* tracep);
+VL_ATTR_COLD void Vysyx_24090013_top___024root__trace_register(Vysyx_24090013_top___024root* vlSelf, VerilatedVcd* tracep);
 
 VL_ATTR_COLD void Vysyx_24090013_top::traceBaseModel(VerilatedTraceBaseC* tfp, int levels, int options) {
     (void)levels; (void)options;
-    VerilatedFstC* const stfp = dynamic_cast<VerilatedFstC*>(tfp);
+    VerilatedVcdC* const stfp = dynamic_cast<VerilatedVcdC*>(tfp);
     if (VL_UNLIKELY(!stfp)) {
-        vl_fatal(__FILE__, __LINE__, __FILE__,"'Vysyx_24090013_top::trace()' called on non-VerilatedFstC object;"
+        vl_fatal(__FILE__, __LINE__, __FILE__,"'Vysyx_24090013_top::trace()' called on non-VerilatedVcdC object;"
             " use --trace-fst with VerilatedFst object, and --trace with VerilatedVcd object");
     }
     stfp->spTrace()->addModel(this);

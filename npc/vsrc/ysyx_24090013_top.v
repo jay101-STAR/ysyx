@@ -1,6 +1,7 @@
 module ysyx_24090013_top(
 	input clk,
-	input rst
+	input rst,
+	input [639:0]inst_rom_1
 
 );
 
@@ -18,6 +19,7 @@ module ysyx_24090013_top(
 	);
 
 	ysyx_24090013_instrom ysyx_24090013_instrom0(
+		.inst_rom_1(inst_rom_1),
 		.openmips_instrom_ren(openmips_instrom_ren),
 		.openmips_instrom_addr(openmips_instrom_addr),
 		.instrom_openmips_data(instrom_openmips_data)

@@ -40,10 +40,11 @@ VM_USER_CFLAGS = \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
-	-lz \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
+	monitor \
+	sdb \
 	sim_main \
 
 # User .cpp directories (from .cpp's on Verilator command line)
@@ -60,6 +61,10 @@ include $(VERILATOR_ROOT)/include/verilated.mk
 ### Executable rules... (from --exe)
 VPATH += $(VM_USER_DIR)
 
+monitor.o: /home/jay/Desktop/ics2024/ysyx-workbench/npc/csrc/monitor.cpp 
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST)  -c -o $@ $<
+sdb.o: /home/jay/Desktop/ics2024/ysyx-workbench/npc/csrc/sdb.cpp 
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST)  -c -o $@ $<
 sim_main.o: /home/jay/Desktop/ics2024/ysyx-workbench/npc/csrc/sim_main.cpp 
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST)  -c -o $@ $<
 
@@ -69,3 +74,4 @@ Vysyx_24090013_top: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_H
 
 
 # Verilated -*- Makefile -*-
+LIBS +=-lreadline    -ldl        

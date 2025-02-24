@@ -13,7 +13,7 @@
 
 class Vysyx_24090013_top__Syms;
 class Vysyx_24090013_top___024root;
-class VerilatedFstC;
+class VerilatedVcdC;
 
 // This class is the main interface to the Verilated model
 class alignas(VL_CACHE_LINE_BYTES) Vysyx_24090013_top VL_NOT_FINAL : public VerilatedModel {
@@ -32,6 +32,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vysyx_24090013_top VL_NOT_FINAL : public Veri
     // propagate new values into/out from the Verilated model.
     VL_IN8(&clk,0,0);
     VL_IN8(&rst,0,0);
+    VL_INW(&inst_rom_1,639,0,20);
 
     // CELLS
     // Public to allow access to /* verilator public */ items.
